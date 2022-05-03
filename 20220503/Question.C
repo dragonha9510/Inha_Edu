@@ -1,5 +1,7 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 
 //	 Q1. 야구게임
 //		세개의 숫자를 입력받고
@@ -177,7 +179,7 @@ int MakeRandomBase(int iarr[], int size)
 //
 //		결과 출력 >
 //				arr 주소 값, 최대 최소의 주소 값
-
+/*/
 void MaxAndMin(int** max, int** min, int arr[], int arrsize);
 
 int main()
@@ -219,3 +221,185 @@ void MaxAndMin(int** max, int** min, int arr[], int arrsize)
 		}
 	}
 }
+//*/
+
+//	 Q3. 도전 실전 예제 p448
+/*/
+void swap(char* ch, void* a, void* b);
+
+int main()
+{
+	int iA = 0;
+	int iB = 0;
+
+	double dA = 0;
+	double dB = 0;
+
+	printf("첫 번째 사람의 나이와 키 입력 : ");
+	scanf("%d %lf", &iA, &dA);
+	printf("두 번째 사람의 나이와 키 입력 : ");
+	scanf("%d %lf", &iB, &dB);
+
+	swap("int", &iA, &iB);
+	swap("double", &dA, &dB);
+
+	printf("첫 번째 사람의 나이와 키 : %d, %.1lf\n", iA, dA);
+	printf("두 번째 사람의 나이와 키 : %d, %.1lf", iB, dB);
+
+	return 0;
+}
+
+void swap(char* ch, void* a, void* b)
+{
+	if (!strcmp(ch, "int"))
+	{
+		int Temp = *(int*)a;
+		*(int*)a = *(int*)b;
+		*(int*)b = Temp;
+	}
+	else
+	{
+		double Temp = *(double*)a;
+		*(double*)a = *(double*)b;
+		*(double*)b = Temp;
+	}
+}
+//*/
+
+//	 Q4. 사용자로부터 문자열을 입력 받아 단어를 역으로 출력하는 프로그램
+//		Quit 입력시 종료
+/*/
+#define BUFFERMAX 80
+
+int main()
+{
+	char chInput[BUFFERMAX] = {'\0'};
+	char chTemp[BUFFERMAX] = {'\0'};
+	char* chBase;
+	char* ptrCh;
+
+	while (1)
+	{
+		printf("문자열 입력 : ");
+		gets_s(chInput, BUFFERMAX);
+		chBase = (char*)malloc(strlen(chInput) + 1);
+		strcpy(chBase, chInput);
+
+		if (!strcmp(chBase, "Quit"))
+		{
+			free(chBase);
+			break;
+		}   // 종료
+
+		int iCnt = 0;
+
+		for (int i = BUFFERMAX - 1; i >= 0; --i)
+		{
+			if (chInput[i - 1] == ' ' || i == 0)
+			{
+				for (int j = 0; j < BUFFERMAX; ++j)
+				{
+					if ('\0' == chInput[i + j] || ' ' == chInput[i + j])
+					{
+						iCnt += j;
+						break;
+					}
+					chTemp[iCnt + j] = chInput[i + j];
+				}
+				chTemp[iCnt++] = ' ';
+			}
+		}
+
+		chTemp[iCnt] = '\0';
+
+		ptrCh = (char*)malloc(strlen(chTemp) + 1);
+		strcpy(ptrCh, chTemp);
+
+		printf("%s\n", ptrCh);
+
+		free(chBase);
+		free(ptrCh);
+	}
+
+	return 0;
+}
+//*/
+
+//*/
+#define BUFFERMAX 80
+
+char* strTok(char* str, char* delimiters);
+int strLen(char* str);
+
+int main()
+{
+	char chInput[BUFFERMAX] = { '\0' };
+	char chTemp[BUFFERMAX] = { '\0' };
+	char* ptrCh;
+
+	while (1)
+	{
+		printf("문자열 입력 : ");
+		gets_s(chInput, BUFFERMAX);
+		ptrCh = (char*)malloc(strLen(chInput) + 1);
+		memset(ptrCh, 0, strLen(chInput) + 1);
+		strcpy(ptrCh, chInput);
+
+		if (!strcmp(ptrCh, "Quit"))
+		{
+			free(ptrCh);
+			break;
+		}   // 종료
+
+		char* chTemp = strTok(ptrCh, " ");
+		while (chTemp != NULL)
+		{
+			printf("%s\n", chTemp);
+			chTemp = strTok(NULL, " ");
+		}
+
+		free(ptrCh);
+	}
+	return 0;
+}
+
+int strLen(char* str) 
+{
+	int cnt = 0;
+	while (str[cnt] != '\0') 
+	{
+		++cnt;
+	}
+	return cnt;
+}
+
+char* strTok(char* str, char* delimiters)
+{
+	static char* temp = NULL;
+
+	if (!temp && str != NULL)
+		temp = str;
+	else if (!temp && str == NULL)
+		return NULL;
+
+	char* tempCutCh = temp;
+
+	while (1) 
+	{ 
+		if (*tempCutCh == *delimiters)
+		{
+			*tempCutCh = '\0';
+			return temp;
+		}
+		else if (*tempCutCh == '\0')
+		{
+			temp = NULL;
+			return NULL;
+		}
+
+		++tempCutCh;
+	}
+
+	return str;
+}
+//*/

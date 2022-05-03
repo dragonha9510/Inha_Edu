@@ -1,5 +1,6 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 
 void print_str(char** pps, int cnt);
@@ -7,7 +8,7 @@ void print_str(char** pps, int cnt);
 void func(int (*fp)(int, int));
 int sum(int a, int b);
 int mul(int a, int b);
-int max(int a, int b);
+int Max(int a, int b);
 
 int main()
 {
@@ -66,7 +67,7 @@ int main()
 	}
 	//*/
 
-	//*/
+	/*/
 	int sel = 0;
 
 	scanf("%d", &sel);
@@ -86,6 +87,45 @@ int main()
 
 	return 0;
 	//*/
+
+	/*/
+	int* pi = NULL;
+
+	pi = (int*)malloc(sizeof(int));
+
+	if (pi == NULL)
+		return -1;
+
+	*pi = 10;
+
+	printf("pi : %d\n", *pi);
+
+	pi = (int*)realloc(pi, 10 * sizeof(int));
+
+	printf("pi : %d\n", *pi);
+
+	free(pi);
+	pi = NULL;
+	//*/
+
+	char temp[80];
+	char* str[3];
+
+	for (int i = 0; i < 3; ++i)
+	{
+		printf("문자열을 입력하세요 : ");
+		gets_s(temp, 80);
+		str[i] = (char*)malloc(strlen(temp) + 1);
+		strcpy(str[i], temp);
+	}
+
+	for (int i = 0; i < 3; ++i)
+	{
+		printf("%s\n", str[i]);
+	}
+
+	for (int i = 0; i < 3; ++i)
+		free(str[i]);
 
 	return 0;
 }
@@ -119,7 +159,7 @@ int mul(int a, int b)
 	return a * b;
 }
 
-int max(int a, int b)
+int Max(int a, int b)
 {
 	return a < b ? b : a;
 }
