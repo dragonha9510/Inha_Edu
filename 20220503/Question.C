@@ -336,6 +336,7 @@ int main()
 	char chInput[BUFFERMAX] = { '\0' };
 	char chTemp[BUFFERMAX] = { '\0' };
 	char* ptrCh;
+	char* ptrTestArr[3];
 
 	while (1)
 	{
@@ -351,12 +352,17 @@ int main()
 			break;
 		}   // Á¾·á
 
-		char* chTemp = strTok(ptrCh, " ");
-		while (chTemp != NULL)
+		//
+		int iCnt = 0;
+
+		ptrTestArr[iCnt++] = strTok(ptrCh, " ");
+		while (ptrTestArr[iCnt] != NULL)
 		{
-			printf("%s\n", chTemp);
-			chTemp = strTok(NULL, " ");
+			ptrTestArr[iCnt++] = strTok(NULL, " ");
 		}
+		//
+		for(int i = 2; i >= 0; --i)
+			printf("%s\t", ptrTestArr[i]);
 
 		free(ptrCh);
 	}
@@ -376,28 +382,34 @@ int strLen(char* str)
 char* strTok(char* str, char* delimiters)
 {
 	static char* temp = NULL;
+	static char tempCutCh[BUFFERMAX];
+	//strcpy_s(tempCutCh, strLen(str) + 1, str);
 
 	if (!temp && str != NULL)
+	{
 		temp = str;
+		strcpy_s(tempCutCh, strLen(str) + 1, str);
+	}
 	else if (!temp && str == NULL)
 		return NULL;
 
-	char* tempCutCh = temp;
+	char* chTemp = tempCutCh;
 
 	while (1) 
 	{ 
-		if (*tempCutCh == *delimiters)
+		if (*chTemp == *delimiters)
 		{
-			*tempCutCh = '\0';
-			return temp;
+			*chTemp = '\0';
+
+			return tempCutCh;
 		}
-		else if (*tempCutCh == '\0')
+		else if (*chTemp == '\0')
 		{
 			temp = NULL;
 			return NULL;
 		}
 
-		++tempCutCh;
+		++chTemp;
 	}
 
 	return str;
