@@ -1,0 +1,9 @@
+lion
+elephant
+pear
+dog
+tiger
+apple
+kangaroo
+orange
+owl
