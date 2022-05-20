@@ -1,4 +1,6 @@
 #include <iostream>
+#include <string>
+#include <vector>
 #include <vld.h>
 
 using namespace std;
@@ -162,32 +164,52 @@ int main()
 //*/
 
 
-void nrpira(int n) 
+void nrpira(const int n) 
 {
+	vector<string> vecLine(n);
+
 	int Max			= n * 2 - 1; // 줄 수 ( 출력 수 )
 	int Start		= 0;		 // 시작 위치
 	int End			= Max;		 // 끝 위치
 	int Num			= 1;		 // 출력 값
 	int Direction	= 1;		 // 방향
+	int Check		= 0;
 
 	for (int i = 0; i < Max; ++i) 
 	{
-		for (int j = 0; j < Max; ++j) 
+		if (i < Start || End <= i)	// start 보다 작고 End 보다 크거나 같으면
+			vecLine[Check] += " ";	// 공백 출력
+		else
+			vecLine[Check] += to_string(Num);	// 나머지 위치는 값 출력
+
+		if (Check >= (Max / 2))		// 절반을 지났다면
+			break;					// 반복문 종료
+
+		if (i == Max - 1)
 		{
-			if (j < Start || End <= j)	// start 보다 작고 End 보다 크거나 같으면
-				cout << " ";			// 공백 출력
-			else
-				cout << Num;	// 나머지 위치는 값 출력
+			Num		+= Direction;
+			Start	+= Direction;
+			End		-= Direction;
+
+			++Check;
+			i = -1;
 		}
+	}
 
-		if (i >= (Max / 2))		// 절반을 지났다면
-			Direction = -1;		// 방향 전환
+	string Temp;
 
-		Num		+= Direction;
-		Start	+= Direction;
-		End		-= Direction;
+	for (int i = 0; i < n - 1; ++i)
+	{
+		cout << vecLine[i] << endl;
+		Temp += " ";
+	}
+	
+	vecLine[n - 1] = Temp + to_string(n);
+	cout << vecLine[n - 1] << endl;
 
-		cout << endl;			// 첫 줄 마지막 개행
+	for (int i = n - 2; i >= 0; --i)
+	{
+		cout << vecLine[i] << endl;
 	}
 }
 
