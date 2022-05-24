@@ -265,58 +265,28 @@ int main()
 //*/
 
 // vector
-/*/
+//*/
 int main()
 {
 	vector<int> vecInt;
 
-	cout << sizeof(vecInt) << endl;
-	cout << vecInt.size() << endl;
-	cout << vecInt.capacity() << endl;
-
-	vecInt.push_back(1);
-	vecInt.push_back(1);
-	vecInt.push_back(1);
+	vecInt.reserve(5);
+	for(int i = 0; i < 15; ++i)
+		vecInt.push_back(i + 1);
 
 	cout << endl;
 
-	cout << sizeof(vecInt) << endl;
-	cout << vecInt.size() << endl;
-	cout << vecInt.capacity() << endl;
-
-	vecInt.erase(vecInt.begin());
-
+	for (size_t i = 0; i < vecInt.size(); ++i)
+	{
+		cout << vecInt[i];
+	}
 	cout << endl;
 
-	cout << sizeof(vecInt) << endl;
-	cout << vecInt.size() << endl;
-	cout << vecInt.capacity() << endl;
-
-	vecInt.clear();
-
-	cout << endl;
-
-	cout << sizeof(vecInt) << endl;
-	cout << vecInt.size() << endl;
-	cout << vecInt.capacity() << endl;
-
-	for(int i = 0; i < 10; ++i)
-		vecInt.push_back(1);
-
-	cout << endl;
-
-	cout << sizeof(vecInt) << endl;
-	cout << vecInt.size() << endl;
-	cout << vecInt.capacity() << endl;
+	cout << vecInt.size() << endl;		// 7    6	 5
+	cout << vecInt.capacity() << endl;	// 10   10   10
 
 	vecInt.clear();
 	vecInt.shrink_to_fit();
-
-	cout << endl;
-
-	cout << sizeof(vecInt) << endl;
-	cout << vecInt.size() << endl;
-	cout << vecInt.capacity() << endl;
 
 	return 0;
 }
@@ -368,6 +338,7 @@ int main()
 
 // 서로다른 진수를 변환
 
+/*/
 string ChangeDecimalNotation(int sour, int notation)
 {
 	string strRes;
@@ -433,3 +404,4 @@ int main()
 
 	return 0;
 }
+//*/
