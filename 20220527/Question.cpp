@@ -1,5 +1,6 @@
 #include <iostream>
 #include <vld.h>
+#include <map>
 #include <new>
 
 using namespace std;
@@ -215,73 +216,239 @@ SPHERECOL CollisionSphere(SPHERE& a, SPHERE& b)
 }
 //*/
 
-const int BUF = 512;
-const int N = 5;
-char buffer[BUF];
+// Q3. 동전을 백만 번 던지는 것을 시뮬레이션 하고
+//		앞면과 뒷면의 수를 출력하는 프로그램 작성.
+/*/
+#define MILLION 100
+
+int POW(int a, int b)
+{
+	int res = 1;
+
+	for (int i = 0; i < b; ++i)
+		res *= a;
+
+	return res;
+}
 
 int main()
 {
-	double* pd1;
-	double* pd2;
+	srand((unsigned int)time(NULL));
 
-	cout << "new와 위치 지정 new의 첫 번째 호출:\n";
-	pd1 = new double[N];
-	pd2 = new(buffer)double[N];
+	int iFront = 0;
+	int iBack = 0;
+	int iCheckPrint = 0;
+	int iCnt = 0;
 
-	for (int i = 0; i < N; ++i)
-		pd2[i] = pd1[i] = 1000 + 20.0 * i;
-
-	cout << "메모리 주소 :\n" << pd1 << " : 힙\t" << (void*)buffer << " : 정적" << endl;
-
-	cout << "메모리 내용 :\n";
-	
-	for (int i = 0; i < N; ++i)
+	while (true)
 	{
-		cout << i + 1 << "\t" << &pd1[i] << " / " << pd1[i] << "\t";
-		cout << i + 1 << "\t" << &pd2[i] << " / " << pd2[i] << endl;
+		iFront = 0;
+		iBack = 0;
+		iCheckPrint = 0;
+		iCnt = 0;
+
+		for (int i = 0; i < MILLION; ++i)
+		{
+			//if (i == iCheckPrint)
+			//{
+			//	//if (i != 0)
+			//	//{
+			//	//	cout << i << " 번째.. \t앞면 : " << ((double)iFront / (double)(iFront + iBack)) * 100.0 <<
+			//	//		"% \t뒷면 : " << ((double)iBack / (double)(iFront + iBack)) * 100.0 << "%" << endl;
+			//	//}
+
+			//	iCheckPrint = POW(10, ++iCnt);
+			//}
+
+			if (rand() % 2)
+				++iFront;
+			else
+				++iBack;
+
+		}
+
+		cout << MILLION << " 번째.. \t앞면 : " << ((double)iFront / (double)MILLION) * 100.0 <<
+			"% \t뒷면 : " << ((double)iBack / (double)MILLION) * 100.0 << "%" << endl;
+
+		if ((double)iFront / (double)MILLION >= 60.0 || (double)iBack / (double)MILLION >= 60.0)
+			break;
+	}
+	return 0;
+}
+//*/
+
+// Q4. 아이템 목록이 다음과 같을 때
+//	등급		아이템		확률		아이템		확률
+//	5star	A			1%
+//	4star	B			3		C			3
+//  3star	D			5		E			5
+//			F			5
+//	2star	G			10		H			10
+//			I			10		J			10
+//	1star	K			38
+//*/
+
+#define MAXPERCENT 100.0
+
+enum ITEM { A, B, C, D, E, F, G, H, I, J, K, ITEM_END };
+
+int main()
+{
+	srand((unsigned int)time(NULL));
+
+	int iCase = 0;
+	int iCurPercent = 0;
+	string strItemName = "ABCDEFGHIJK";
+	const int iItemOri[ITEM_END] = { 1,3,3,5,5,5,10,10,10,10,38 };
+	int iItemCur[ITEM_END] = { 1,3,3,5,5,5,10,10,10,10,38 };
+	int iItemRes[ITEM_END] = {};
+
+	cout << "반복 횟수";
+	cin >> iCase;
+
+	double dByOne = (double)iCase / MAXPERCENT;
+
+	while (dByOne > 0)
+	{
+		int iN = iCase > (int)MAXPERCENT ? (int)MAXPERCENT : iCase;
+		int iMax = (int)MAXPERCENT;
+
+		for (int i = 0; i < iN; ++i)
+		{
+			int iChoose = rand() % iMax;
+
+			for (int j = 0; j < ITEM_END; ++j)
+			{
+				iCurPercent += iItemCur[j];
+				 
+				if (iChoose < iCurPercent)
+				{
+					--iMax;
+					--iItemCur[j];
+					++iItemRes[j];
+					iCurPercent = 0;
+					break;
+				}
+			}
+		}
+
+		memcpy(iItemCur, iItemOri, sizeof(int) * ITEM_END);
+		--dByOne;
+		iCase -= (int)MAXPERCENT;
 	}
 
-	cout << "\nnew와 위치 지정 new의 두 번째 호출 :\n";
-	
-	double* pd3 = nullptr;
-	double* pd4 = nullptr;
+	// result 출력
+	for (int i = 0; i < ITEM_END; ++i)
+		cout << strItemName[i] << " 아이템\t" << iItemRes[i] << endl;
+}
 
-	pd3 = new double[N];
-	pd4 = new(buffer)double[N];
+//*/
 
-	for (int i = 0; i < N; ++i)
-		pd4[i] = pd3[i] = 1000 + 40.0 * i;
+// Q5. p.128 문제 9. bsearchx() 함수를 구현하라 ( 순서도 포함 )
+/*/
 
-	cout << "메모리 내용 : \n";
-	
-	for (int i = 0; i < N; ++i)
+#define ABS(t) (t) < 0 ? (t) * -1 : t
+
+int int_cmp(const int* a, const int* b);
+void* bsearchx(const void* key, const void* base, size_t nmemb, size_t size, int(*compare)(const void*, const void*));
+
+int main()
+{
+	int* pArr = 0;
+	int iSize = 0;
+	int iSearch = 0;
+
+	cout << "배열 크기 : ";
+	cin >> iSize;
+
+	pArr = new int[iSize];
+
+	cout << "원소 입력 : ";
+
+	for (int i = 0; i < iSize; ++i)
 	{
-		cout << i + 1 << "\t" << &pd3[i] << " / " << pd3[i] << "\t";
-		cout << i + 1 << "\t" << &pd4[i] << " / " << pd4[i] << endl;
+		do 
+		{
+			cin >> pArr[i];
+		} while (pArr[i] < pArr[i - 1]);
 	}
 
-	cout << "\nnew와 위치 지정 new의 세 번째 호출\n";
-	delete[] pd1;
-	pd1 = nullptr;
+	cout << "검색 할 값 : ";
+	cin >> iSearch;
 
-	pd1 = new double[N];
-	pd2 = new(buffer + N * sizeof(double))double[N];
+	int* pRes = nullptr;
+	pRes = ((int*)bsearchx(&iSearch, pArr, iSize, sizeof(int), (int(*)(const void*, const void*))int_cmp));
 
-	for (int i = 0; i < N; ++i)
-		pd2[i] = pd1[i] = 1000 + 60.0 * i;
-
-	cout << "메모리 내용 : \n";
-
-	for(int i = 0; i < N; ++i)
+	cout << endl;
+	cout << "배이스 시작 주소 : " << pArr << endl;
+	
+	if (pRes == nullptr)
+		cout << "찾는 값이 없습니다." << endl;
+	else
 	{
-		cout << i + 1 << "\t" << &pd1[i] << " / " << pd1[i] << "\t";
-		cout << i + 1 << "\t" << &pd2[i] << " / " << pd2[i] << endl;
+		cout << "가장 앞 요소 값 : " << *pRes << endl;
+		cout << "가장 앞 요소 주소 : " << pRes << endl;
 	}
 
-	delete[] pd1;
-	delete[] pd3;
-
-	system("pause");
+	delete[] pArr;
+	pArr = nullptr;
 
 	return 0;
 }
+
+int int_cmp(const int* a, const int* b)
+{
+	if (*a < *b)
+		return -1;
+	else if (*a > *b)
+		return 1;
+	else
+		return 0;
+}
+
+void* bsearchx(const void* key, const void* base, size_t nmemb, size_t size, int(*compare)(const void*, const void*))
+{
+	int front = 0;
+	int back = nmemb - 1;
+	int Index = back / 2;
+	int iCnt = 0;
+	bool bFind = false;
+
+	while (true)
+	{
+		switch (compare(key, ((int*)base + Index)))
+		{
+		case -1:
+			back = Index - 1;
+			break;
+		case 0:
+			bFind = true;
+			break;
+		case 1:
+			front = Index + 1;
+			break;
+		}
+
+		if (ABS((front - back)) == 1)
+		{
+			++iCnt;
+
+			if (iCnt == 2)
+				return nullptr;
+		}
+
+		if (bFind)
+			break;
+
+		Index = front + ((back - front) / 2);
+	}
+
+	int iRes = Index;
+
+	for (int i = Index; *((int*)base + i) == *((int*)base + Index); --i)
+		iRes = i;
+	
+	return ((int*)base + iRes);
+}
+
+//*/

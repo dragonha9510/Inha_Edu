@@ -1,0 +1,66 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="소스 파일">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="헤더 파일">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="리소스 파일">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="소스 파일\20220531">
+      <UniqueIdentifier>{9954a999-1eb6-41e2-aad3-cb5c5d027c3e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\20220531\Class">
+      <UniqueIdentifier>{49938d8c-18d4-4278-b430-4123e1cc19fb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\Question">
+      <UniqueIdentifier>{d5a1225f-d0cd-4f80-b3af-262968c99963}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\Algorithm">
+      <UniqueIdentifier>{ab3da92e-5d81-4b55-82a7-fb3260508de2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\Algorithm\Stack">
+      <UniqueIdentifier>{325e0eda-3d6b-4c54-98eb-996e60065531}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\Algorithm\main">
+      <UniqueIdentifier>{a17e4e87-44b2-4836-8457-fe3f5fb929f7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\default">
+      <UniqueIdentifier>{e7f4ff4d-e1ca-4514-8618-8e3ec64db5fa}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Stock.cpp">
+      <Filter>소스 파일\20220531\Class</Filter>
+    </ClCompile>
+    <ClCompile Include="20220531.cpp">
+      <Filter>소스 파일\20220531</Filter>
+    </ClCompile>
+    <ClCompile Include="Question.cpp">
+      <Filter>소스 파일\Question</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>소스 파일\Algorithm\main</Filter>
+    </ClCompile>
+    <ClCompile Include="MyStack.cpp">
+      <Filter>소스 파일\Algorithm\Stack</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="stdafx.h">
+      <Filter>소스 파일\default</Filter>
+    </ClInclude>
+    <ClInclude Include="Stock.h">
+      <Filter>소스 파일\20220531\Class</Filter>
+    </ClInclude>
+    <ClInclude Include="MyStack.h">
+      <Filter>소스 파일\Algorithm\Stack</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
