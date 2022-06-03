@@ -13,21 +13,42 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="소스 파일\C++">
+      <UniqueIdentifier>{a3bcd38b-60dc-4e91-90fd-ef1b51fb8b3d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\C++\BankAccount">
+      <UniqueIdentifier>{e9eebfba-586a-46d6-b2a2-479482fc146c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\Algorithm">
+      <UniqueIdentifier>{311520b9-c23c-42a4-b4c4-4dd3051415c1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\Algorithm\Queue">
+      <UniqueIdentifier>{a20900da-000c-4e25-aad5-a505020bb8d1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Question.cpp">
-      <Filter>소스 파일</Filter>
+      <Filter>소스 파일\C++</Filter>
     </ClCompile>
     <ClCompile Include="BankAccount.cpp">
-      <Filter>소스 파일</Filter>
+      <Filter>소스 파일\C++\BankAccount</Filter>
+    </ClCompile>
+    <ClCompile Include="UseQueue_Main.cpp">
+      <Filter>소스 파일\Algorithm</Filter>
+    </ClCompile>
+    <ClCompile Include="MyQueue.cpp">
+      <Filter>소스 파일\Algorithm\Queue</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="BankAccount.h">
-      <Filter>소스 파일</Filter>
-    </ClInclude>
     <ClInclude Include="stdafx.h">
       <Filter>소스 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="BankAccount.h">
+      <Filter>소스 파일\C++\BankAccount</Filter>
+    </ClInclude>
+    <ClInclude Include="MyQueue.h">
+      <Filter>소스 파일\Algorithm\Queue</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
