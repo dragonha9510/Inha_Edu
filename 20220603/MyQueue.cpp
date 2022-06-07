@@ -12,7 +12,7 @@ CMyQueue::~CMyQueue()
 
 int CMyQueue::Initialize(size_t size)
 {
-    if (size < 0)
+    if (size < 1)
     {
         cout << "입력된 크기 0, 다시 할당 해주세요." << endl;
         return -1;
