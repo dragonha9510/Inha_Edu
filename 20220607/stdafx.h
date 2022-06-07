@@ -1,6 +1,7 @@
 #include <iostream>
 #include <vld.h>
 #include <math.h>
+#include <string.h>
 
 using namespace std;
 
