@@ -11,7 +11,7 @@ int main()
 	//Question2();
 
 	//Point
-	Question3();
+	//Question3();
 
 	return 0;
 }
