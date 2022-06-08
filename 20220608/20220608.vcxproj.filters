@@ -1,0 +1,84 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="소스 파일">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="헤더 파일">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="리소스 파일">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="소스 파일\20220608">
+      <UniqueIdentifier>{a85e0e80-c857-4aa4-96db-7ce09e41e5bb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\default">
+      <UniqueIdentifier>{64c06536-1761-4a1f-9a13-25a5fee96e64}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\main">
+      <UniqueIdentifier>{e0e9c63e-55b1-4af5-9e9b-d9a738296f5a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\20220608\Stonewt1">
+      <UniqueIdentifier>{c63569a0-f3a6-4cc8-834f-4b5d8304e326}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\20220608\Circle2D">
+      <UniqueIdentifier>{610a0f53-f4b1-4a6b-9b09-63fad7494f85}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\20220608\Rectangle2D">
+      <UniqueIdentifier>{ecfb9a0c-3d86-4dd5-b1bb-3f35b11e0ece}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\20220608\MyPoint">
+      <UniqueIdentifier>{0e987bba-2a6f-4924-8744-80d0de9ababd}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="stdafx0608.h">
+      <Filter>소스 파일\default</Filter>
+    </ClInclude>
+    <ClInclude Include="Class0608.h">
+      <Filter>소스 파일\20220608</Filter>
+    </ClInclude>
+    <ClInclude Include="Stonewt.h">
+      <Filter>소스 파일\20220608\Stonewt1</Filter>
+    </ClInclude>
+    <ClInclude Include="Circle2D.h">
+      <Filter>소스 파일\20220608\Circle2D</Filter>
+    </ClInclude>
+    <ClInclude Include="Func0608.h">
+      <Filter>소스 파일\default</Filter>
+    </ClInclude>
+    <ClInclude Include="Rectangle2D.h">
+      <Filter>소스 파일\20220608\Rectangle2D</Filter>
+    </ClInclude>
+    <ClInclude Include="MyPoint.h">
+      <Filter>소스 파일\20220608\MyPoint</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="20220608.cpp">
+      <Filter>소스 파일\main</Filter>
+    </ClCompile>
+    <ClCompile Include="Class0608.cpp">
+      <Filter>소스 파일\20220608</Filter>
+    </ClCompile>
+    <ClCompile Include="Stonewt.cpp">
+      <Filter>소스 파일\20220608\Stonewt1</Filter>
+    </ClCompile>
+    <ClCompile Include="Circle2D.cpp">
+      <Filter>소스 파일\20220608\Circle2D</Filter>
+    </ClCompile>
+    <ClCompile Include="Func0608.cpp">
+      <Filter>소스 파일\default</Filter>
+    </ClCompile>
+    <ClCompile Include="Rectangle2D.cpp">
+      <Filter>소스 파일\20220608\Rectangle2D</Filter>
+    </ClCompile>
+    <ClCompile Include="MyPoint.cpp">
+      <Filter>소스 파일\20220608\MyPoint</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>
