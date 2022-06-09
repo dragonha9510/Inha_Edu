@@ -1,6 +1,8 @@
 #include "stdafx.h"
-#include <stack>
-// ((4*2+12)*(123+7))
+// ((4*2+12)*(123+7))					2600
+// ((-2*(-1-1))-3.9)+(6/((3+3)/6.0))	6.1
+// ((4/3*6))							8
+// ((15-2*3*4+5))						-4
 
 int main()
 {
@@ -47,9 +49,17 @@ int main()
 			stkCal.Peek(&strTemp);
 			if (stkCal.Size())
 			{
-				if (((strTemp[0] == '/' || strTemp[0] == '*') && (strInput[i] == '+' || strInput[i] == '-')) 
-					|| (((strTemp[0] == '/' || strTemp[0] == '*') && (strInput[i] == '*' || strInput[i] == '/')))
-					|| ((strTemp[0] == '+' || strTemp[0] == '-') && (strInput[i] == '+' || strInput[i] == '-')))
+				char temp = strInput[i];
+
+				if (((strTemp[0] == '/' || strTemp[0] == '*') && (temp == '+' || temp == '-')))
+				{
+					stkCal.Pop(&strTemp);
+					queCal.Enque(strTemp);
+					stkCal.Peek(&strTemp);
+				}
+
+				if(((strTemp[0] == '+' || strTemp[0] == '-') && (temp == '+' || temp == '-'))
+					|| (((strTemp[0] == '/' || strTemp[0] == '*') && (temp == '*' || temp == '/'))))
 				{
 					stkCal.Pop(&strTemp);
 					queCal.Enque(strTemp);
@@ -79,6 +89,9 @@ int main()
 
 			strTemp.clear();
 		}
+
+		stkCal.Print();
+		queCal.Print();
 	}
 
 	while (stkCal.Size())
@@ -92,7 +105,7 @@ int main()
 	string num1, num2;
 	double dRes = 0;
 
-	for (;queCal.size() != 0;)
+	while (queCal.size())
 	{
 		queCal.Deque(&res);
 
