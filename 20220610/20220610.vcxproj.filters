@@ -1,0 +1,93 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="0.Main">
+      <UniqueIdentifier>{387c2ea6-0566-43d0-8e8c-58175372d7c2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="99.Default">
+      <UniqueIdentifier>{be6738bf-62a7-479a-bf5f-bf6be48fd87c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="1.Object">
+      <UniqueIdentifier>{b2e17569-7e8e-4864-9539-dc89fc5da2ed}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="1.Object\TableTennisPlayer">
+      <UniqueIdentifier>{952f9f24-4a46-49e2-8891-572b51537aa3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="1.Object\RatedPlayer">
+      <UniqueIdentifier>{9a5286ca-2b15-4ab7-9966-5f28abef6c26}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="0.Main\Main_Division">
+      <UniqueIdentifier>{2a0aacec-cfcc-45c5-ab72-9a6b4bc2e36f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="1.Object\2D_Object">
+      <UniqueIdentifier>{f2979470-71f4-44c1-ab4c-76c4321b706f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="1.Object\2D_Object\Circle2D">
+      <UniqueIdentifier>{eb6f1608-c97f-4739-9b6c-fe545154faa4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="1.Object\2D_Object\Rectangle2D">
+      <UniqueIdentifier>{694d82df-c42c-4bc6-b8e7-5079f904d2f4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="1.Object\2D_Object\MyPoint">
+      <UniqueIdentifier>{8e903c68-f381-45fd-abdd-88508f0fe59b}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="stdafx0610.h">
+      <Filter>99.Default</Filter>
+    </ClInclude>
+    <ClInclude Include="TableTennisPlayer.h">
+      <Filter>1.Object\TableTennisPlayer</Filter>
+    </ClInclude>
+    <ClInclude Include="RatedPlayer.h">
+      <Filter>1.Object\RatedPlayer</Filter>
+    </ClInclude>
+    <ClInclude Include="MainDivision.h">
+      <Filter>0.Main\Main_Division</Filter>
+    </ClInclude>
+    <ClInclude Include="MyPoint.h">
+      <Filter>1.Object\2D_Object\MyPoint</Filter>
+    </ClInclude>
+    <ClInclude Include="Circle2D.h">
+      <Filter>1.Object\2D_Object\Circle2D</Filter>
+    </ClInclude>
+    <ClInclude Include="Rectangle2D.h">
+      <Filter>1.Object\2D_Object\Rectangle2D</Filter>
+    </ClInclude>
+    <ClInclude Include="2D_Object.h">
+      <Filter>1.Object\2D_Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Macros.h">
+      <Filter>99.Default</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Main0610.cpp">
+      <Filter>0.Main</Filter>
+    </ClCompile>
+    <ClCompile Include="TableTennisPlayer.cpp">
+      <Filter>1.Object\TableTennisPlayer</Filter>
+    </ClCompile>
+    <ClCompile Include="RatedPlayer.cpp">
+      <Filter>1.Object\RatedPlayer</Filter>
+    </ClCompile>
+    <ClCompile Include="MainDivision.cpp">
+      <Filter>0.Main\Main_Division</Filter>
+    </ClCompile>
+    <ClCompile Include="MyPoint.cpp">
+      <Filter>1.Object\2D_Object\MyPoint</Filter>
+    </ClCompile>
+    <ClCompile Include="Circle2D.cpp">
+      <Filter>1.Object\2D_Object\Circle2D</Filter>
+    </ClCompile>
+    <ClCompile Include="Rectangle2D.cpp">
+      <Filter>1.Object\2D_Object\Rectangle2D</Filter>
+    </ClCompile>
+    <ClCompile Include="2D_Object.cpp">
+      <Filter>1.Object\2D_Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Macros.cpp">
+      <Filter>99.Default</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

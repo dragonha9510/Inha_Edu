@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Codes">
+      <UniqueIdentifier>{b7d843c4-382a-4477-bca0-f8388883ee41}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Default">
+      <UniqueIdentifier>{c13ad45b-374c-42f2-b4cd-6d14ab07de74}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Codes\StopWatch">
+      <UniqueIdentifier>{cb101866-fbce-405b-beff-2472206ad269}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Codes\Division">
+      <UniqueIdentifier>{1b8b3f75-3065-4ea0-987f-8c843233a8e3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Codes\SocialAccound">
+      <UniqueIdentifier>{28474668-634e-4cf5-94c9-05ae98742059}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Codes\Worker">
+      <UniqueIdentifier>{5fa44b0c-d095-45c3-96b5-cd11e1b7bb09}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="20220614Main.cpp">
+      <Filter>Codes</Filter>
+    </ClCompile>
+    <ClCompile Include="StopWatch.cpp">
+      <Filter>Codes\StopWatch</Filter>
+    </ClCompile>
+    <ClCompile Include="MainDivision0614.cpp">
+      <Filter>Codes\Division</Filter>
+    </ClCompile>
+    <ClCompile Include="SocialAccount.cpp">
+      <Filter>Codes\SocialAccound</Filter>
+    </ClCompile>
+    <ClCompile Include="Worker.cpp">
+      <Filter>Codes\Worker</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="stdafx0614.h">
+      <Filter>Default</Filter>
+    </ClInclude>
+    <ClInclude Include="StopWatch.h">
+      <Filter>Codes\StopWatch</Filter>
+    </ClInclude>
+    <ClInclude Include="MainDivision0614.h">
+      <Filter>Codes\Division</Filter>
+    </ClInclude>
+    <ClInclude Include="SocialAccount.h">
+      <Filter>Codes\SocialAccound</Filter>
+    </ClInclude>
+    <ClInclude Include="Worker.h">
+      <Filter>Codes\Worker</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
