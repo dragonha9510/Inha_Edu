@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Codes">
+      <UniqueIdentifier>{8c7f281c-0e91-40a6-9ca9-64ae6a7db5c4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Default">
+      <UniqueIdentifier>{75d2bdc0-632f-4074-b044-7f8e1264b0cc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Codes\exc_mean">
+      <UniqueIdentifier>{4a9df814-0802-4cb7-90c9-08d002c4e881}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="stdafx0615.h">
+      <Filter>Default</Filter>
+    </ClInclude>
+    <ClInclude Include="MainDivision0615.h">
+      <Filter>Codes</Filter>
+    </ClInclude>
+    <ClInclude Include="Bad_hmean.h">
+      <Filter>Codes\exc_mean</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Main0615.cpp">
+      <Filter>Codes</Filter>
+    </ClCompile>
+    <ClCompile Include="MainDivision0615.cpp">
+      <Filter>Codes</Filter>
+    </ClCompile>
+    <ClCompile Include="Bad_hmean.cpp">
+      <Filter>Codes\exc_mean</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

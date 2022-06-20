@@ -130,7 +130,7 @@ void makeCase8Queen(int ypos, int* Pos, int& res)
 
 		for (int y = 0; y < ypos; ++y)
 		{							
-			if (/*Pos[y] == x || */(abs(x - Pos[y]) == abs(ypos - y)))
+			if (Pos[y] == x || (abs(x - Pos[y]) == abs(ypos - y)))
 			{
 				bCanPlace = false;
 				break;
