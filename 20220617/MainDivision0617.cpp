@@ -3,8 +3,8 @@
 #include <fstream>
 #include <string>
 #include <cstring>
-#include <iomanip>
 #include <windows.h>
+#include <iomanip>
 #include "StopWatch.h"
 #include "MainDivision0617.h"
 

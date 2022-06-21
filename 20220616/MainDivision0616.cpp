@@ -205,7 +205,7 @@ void SelectSort(int arr[], int n)
 	}
 }
 
-#define SORTTESTCASE 500000
+#define SORTTESTCASE 700000
 void SelectSortMain()
 {
 	srand((unsigned int)time(NULL));
@@ -213,30 +213,108 @@ void SelectSortMain()
 
 	int* iArr = new int[SORTTESTCASE];
 	int* iArr2 = new int[SORTTESTCASE];
+	int* iArr3 = new int[SORTTESTCASE];
 
 	for (int i = 0; i < SORTTESTCASE; ++i)
-		iArr2[i] = iArr[i] = (rand() % SORTTESTCASE) + 1;
+		iArr3[i] = iArr2[i] = iArr[i] = (rand() % SORTTESTCASE) + 1;
 
-	timer.Start();
-	SelectSort(iArr, SORTTESTCASE);
-	timer.Stop();
+	//timer.Start();
+	//SelectSort(iArr, SORTTESTCASE);
+	//timer.Stop();
 
-	cout << endl;
-	cout << "선택 정렬 걸린 시간 : " << timer.getElapsedTime() << endl;
+	//cout << endl;
+	//cout << "선택 정렬 걸린 시간 : " << timer.getElapsedTime() << endl;
 
 	//
 
 	timer.Start();
-	BubbleSort(iArr2, SORTTESTCASE);
+	ShellSortInsert2(iArr2, SORTTESTCASE);
 	timer.Stop();
 
 	cout << endl;
-	cout << "버블 정렬 걸린 시간 : " << timer.getElapsedTime() << endl;
-	
+	cout << "셸 정렬 (4중) 걸린 시간 : " << timer.getElapsedTime() << endl;
+
+	//
+
+	timer.Start();
+	ShellSortInsert(iArr3, SORTTESTCASE);
+	timer.Stop();
+
+	cout << endl;
+	cout << "셸 정렬 (3중) 걸린 시간 : " << timer.getElapsedTime() << endl;
+
 	delete[] iArr;
 	iArr = nullptr;
 	delete[] iArr2;
 	iArr2 = nullptr;
+	delete[] iArr3;
+	iArr3 = nullptr;
+}
+
+#define SWAP(a, b) {int swaptemp = a; a = b; b = swaptemp;}
+void ShellSortBubble(int arr[], int n)
+{
+	int shell = n + (n % 2);
+
+	while (shell /= 2)
+	{
+		for (int i = 0; i < shell; ++i)
+		{
+			for (int j = shell + i; j < n; j += shell)
+			{
+				if (arr[j - shell] > arr[j])
+				{
+					SWAP(arr[j - shell], arr[j]);
+					j = shell + i;
+				}
+			}
+		}
+	}
+}
+
+void ShellSortInsert(int arr[], int n)
+{
+	int shell = n + (n % 2);
+
+	while (shell /= 2)
+	{
+		for (int i = shell, j = 0; i < n; ++i)
+		{
+			int temp = arr[i];
+
+			for (j = i - shell; j >= 0 && arr[j] > temp; j -= shell)
+				arr[j + shell] = arr[j];
+
+			arr[j + shell] = temp;
+		}
+	}
+}
+
+void ShellSortInsert2(int arr[], int n)
+{
+	int	shell = n;
+
+	while (shell /= 2)
+	{
+		if ((shell % 2) == 0)
+			++shell;
+
+		for (int i = 0; i < shell; ++i)
+		{
+			int key;
+			for (int j = i + shell, k = 0; j <= n - 1; j = j + shell)
+			{
+				key = arr[j];
+
+				for (k = j - shell; k >= i && arr[k] > key; k = k - shell)
+				{
+					arr[k + shell] = arr[k];
+				}
+
+				arr[k + shell] = key;
+			}
+		}
+	}
 }
 
 void recursion3n1(unsigned long long k)

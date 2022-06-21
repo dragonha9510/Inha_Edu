@@ -12,5 +12,8 @@ void Class0616Main4();
 
 void SelectSort(int arr[], int n);
 void SelectSortMain();
+void ShellSortInsert(int arr[], int n);
+void ShellSortInsert2(int arr[], int n);
+
 
 void recursion3n1(unsigned long long k);
