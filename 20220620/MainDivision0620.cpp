@@ -4,6 +4,7 @@
 #include <string>
 #include <cstring>
 #include <windows.h>
+#include <vld.h>
 #include "MainDivision0620.h"
 #include "StopWatch.h"
 
@@ -292,7 +293,7 @@ void ShellSort(int arr[], int n)
 	}
 }
 
-#define SORTTESTCASE 10000000
+#define SORTTESTCASE 1000000
 
 void ShellSortMain()
 {
@@ -306,35 +307,40 @@ void ShellSortMain()
 	for (int i = 0; i < SORTTESTCASE; ++i)
 	{
 		int iRand = 0;
-		for (int j = 0; j < SORTTESTCASE / RAND_MAX; ++j)
-			iRand = rand();
+		for (int j = 0; j < (SORTTESTCASE / RAND_MAX) + 1; ++j)
+			iRand += rand();
 		iArr3[i] = iArr2[i] = iArr[i] = (iRand % SORTTESTCASE) + 1;
 	}
 
+	cout << "ÃøÁ¤ ½ÃÀÛ" << endl;
 	cout << endl;
 
 	timer.Start();
-	QuickSort(iArr, SORTTESTCASE, 0, SORTTESTCASE - 1);
+	CountingSortBook(iArr, 0, SORTTESTCASE - 1);
 	timer.Stop();
 
-	cout << "Äü + 0 : " << endl;
+	cout << "µµ¼ö Ã¥ : " << endl;
 	cout << timer.getElapsedTime() << endl;
 
 	cout << endl;
 	timer.Start();
-	QuickSort2(iArr2, SORTTESTCASE, 0, SORTTESTCASE - 1);
+	HeapSortBook(iArr2, SORTTESTCASE);
 	timer.Stop();
 
-	cout << "Äü + 1 : " << endl;
+	cout << "ÈüÃ¥ : " << endl;
 	cout << timer.getElapsedTime() << endl;
 
+	cout << endl;
+	timer.Start();
+	CountingSort(iArr3, SORTTESTCASE, SORTTESTCASE);
+	timer.Stop();
+
+	//for (int i = 0; i < SORTTESTCASE; ++i)
+	//	cout << iArr3[i] << " ";
 	//cout << endl;
-	//timer.Start();
-	//SW::Quick_sort(iArr3, 0, SORTTESTCASE - 1);
-	//timer.Stop();
 
-	//cout << "Äü¼º¿î : " << endl;
-	//cout << timer.getElapsedTime() << endl;
+	cout << "µµ¼ö³»²¨ : " << endl;
+	cout << timer.getElapsedTime() << endl;
 
 	delete[] iArr;
 	iArr = nullptr;
@@ -342,33 +348,24 @@ void ShellSortMain()
 	iArr2 = nullptr;
 	delete[] iArr3;
 	iArr3 = nullptr;
+	// 
+	// 
+	//const unsigned int testcase = 10;
+	//srand((unsigned int)time(NULL));
+	//int iArr[testcase] = {1,5,4,7,8,9,1,4,2,6 };
+	//					// 1 1 2 4 4 5 6 7 8 9
 
-	//int iArr[9] = { 1,7,5,6,2,3,4,8,9 };
-	//int iArr2[9] = { 1,8,7,4,5,7,6,3,9 };
-	//int iArr3[9] = { 5,8,2,4,5,7,9,8,9 };
-	//for (int i = 0; i < 9; ++i)
+	//cout << "start" << endl;
+	//for (int i = 0; i < testcase; ++i)
+	//	cout << (iArr[i] = rand() % testcase) << " ";
+	//cout << endl;
+
+	//CountingSort(iArr, testcase, testcase);
+
+	//cout << endl;
+	//cout << "end" << endl;
+	//for (int i = 0; i < testcase; ++i)
 	//	cout << iArr[i] << " ";
-	//cout << endl;
-	//QuickSort(iArr, 9, 0, 8);
-	//for (int i = 0; i < 9; ++i)
-	//	cout << iArr[i] << " ";
-	//cout << endl;
-	//cout << "----------" << endl;
-	//cout << endl;
-
-	//QuickSort(iArr2, 9, 0, 8);
-	//for (int i = 0; i < 9; ++i)
-	//	cout << iArr2[i] << " ";
-	//cout << endl;
-	//cout << "----------" << endl;
-	//cout << endl;
-
-	//QuickSort(iArr3, 9, 0, 8);
-	//for (int i = 0; i < 9; ++i)
-	//	cout << iArr3[i] << " ";
-	//cout << endl;
-	//cout << "----------" << endl;
-	//cout << endl;
 }
 
 void QuickSort(int arr[], int n, int start, int end)
@@ -485,4 +482,279 @@ void QuickSortBook(int arr[], int left, int right)
 
 	if (left < pr) QuickSortBook(arr, left, pr);
 	if (pl < right) QuickSortBook(arr, pl, right);
+}
+
+void MergeSort(int arr[], int n)
+{
+	if (n == 1)
+		return;
+	
+	int iFrontSize = n / 2;
+	int* pFrontArr = new int[iFrontSize];
+	int* pBackArr = new int[n - iFrontSize];
+
+	int frontidx = 0;
+	int backidx = 0;
+
+	for (int i = 0; i < n; ++i)
+	{
+		if (i < iFrontSize)
+			pFrontArr[frontidx++] = arr[i];
+
+		else
+			pBackArr[backidx++] = arr[i];
+	}
+	
+	MergeSort(pFrontArr, iFrontSize);
+	MergeSort(pBackArr, n - iFrontSize);
+
+	frontidx = 0;
+	backidx = 0;
+
+	for (int i = 0; i < n; ++i)
+	{
+		if (pFrontArr[frontidx] < pBackArr[backidx])
+		{
+			if (frontidx == iFrontSize)
+				arr[i] = pBackArr[backidx++];
+			else
+				arr[i] = pFrontArr[frontidx++];
+		}
+		else
+		{
+			if (backidx == n - iFrontSize)
+				arr[i] = pFrontArr[frontidx++];
+			else
+				arr[i] = pBackArr[backidx++];
+		}
+	}
+
+	delete[] pFrontArr;
+	pFrontArr = nullptr;
+
+	delete[] pBackArr;
+	pBackArr;
+}
+
+void _Merge(int arr[], int n, int start, int end, int origin[])
+{
+	int iCenter = ((start + end) / 2);
+
+	if (iCenter == 0 || start == end)
+		return;
+
+	_Merge(arr, n, start, iCenter, origin);
+	_Merge(arr, n, iCenter + 1, end, origin);
+
+	int frontidx = start;
+	int backidx = iCenter + 1;
+
+	for (int i = start; i < end + 1; ++i)
+	{
+		if (arr[frontidx] < arr[backidx])
+		{
+			if (frontidx == iCenter + 1)
+				origin[i] = arr[backidx++];
+			else
+				origin[i] = arr[frontidx++];
+		}
+		else
+		{
+			if (backidx == end + 1)
+				origin[i] = arr[frontidx++];
+			else
+				origin[i] = arr[backidx++];
+		}
+	}
+}
+void MergeSort2(int arr[], int n)
+{
+	if (n == 1)
+		return;
+
+	int* pTemp = new int[n];
+	memcpy(pTemp, arr, sizeof(int) * n);
+
+	_Merge(pTemp, n, 0, n - 1, arr);
+
+	delete[] pTemp;
+}
+
+void Merge(int arr[], int start, int end, int temp[])
+{
+	int center = (start + end) / 2;
+	int frontidx = start;
+	int backidx = center + 1;
+	int tmpCnt = frontidx;
+
+	while (frontidx <= center && backidx <= end)
+		temp[tmpCnt++] = arr[frontidx] <= arr[backidx] ? arr[frontidx++] : arr[backidx++];
+
+	if (frontidx > center)
+	{
+		for (int i = backidx; i <= end; ++i)
+			temp[tmpCnt++] = arr[i];
+	}
+	else
+	{
+		for (int i = frontidx; i <= center; ++i)
+			temp[tmpCnt++] = arr[i];
+	}
+
+	for (int i = start; i <= end; ++i)
+		arr[i] = temp[i];
+}
+
+void _MergeSort3(int arr[], int start, int end, int temp[])
+{
+	if(start == end) 
+		return;
+
+	int center = (start + end) / 2;
+
+	_MergeSort3(arr, start, center, temp);
+	_MergeSort3(arr, center + 1, end, temp);
+	Merge(arr, start, end, temp);
+}
+
+void MergeSort3(int arr[], int n)
+{
+	int* temp = new int[n];
+
+	_MergeSort3(arr, 0, n - 1, temp);
+
+	delete[] temp;
+	temp = nullptr;
+}
+
+void __mergesort(int arr[], int left, int right, int buff[])
+{
+	if (left < right)
+	{
+		int center = (left + right) / 2;
+		int p = 0;
+		int i;
+		int j = 0;
+		int k = left;
+
+		__mergesort(arr, left, center, buff);
+		__mergesort(arr, center + 1, right, buff);
+		for (i = left; i <= center; ++i)
+			buff[p++] = arr[i];
+		while (i <= right && j < p)
+			arr[k++] = (buff[j] <= arr[i]) ? buff[j++] : arr[i++];
+		while (j < p)
+			arr[k++] = buff[j++];
+	}
+}
+
+int mergesort(int arr[], int n)
+{
+	int* buff = nullptr;
+	if ((buff = (int*)calloc(n, sizeof(int))) == NULL)
+		return -1;
+	
+	__mergesort(arr, 0, n - 1, buff);
+	free(buff);
+	return 0;
+}
+
+#define SWAP(type, a, b) {type temp = a; a = b; b = temp;}
+
+void Heap(int arr[], int parent, int n)
+{
+	int child = (parent * 2) + 1;
+
+	while (child < n)
+	{
+		if (child + 1 < n && arr[child] < arr[child + 1])
+			++child;
+
+		if (arr[parent] < arr[child])
+			SWAP(int, arr[parent], arr[child]);
+
+		parent = child;
+		child = (parent * 2) + 1;
+	}
+}
+
+void HeapSort(int arr[], int n)
+{
+	for (int i = n / 2; i >= 0; --i)
+		Heap(arr, i, n);
+	for (int i = n - 1; i > 0; --i)
+	{
+		SWAP(int, arr[0], arr[i]);
+		Heap(arr, 0, i - 1);
+	}
+}
+
+void downheap(int arr[], int left, int right)
+{
+	int temp = arr[left];
+	int child;
+	int parent;
+	for (parent = left; parent < (right + 1) / 2; parent = child)
+	{
+		int cl = parent * 2 + 1;
+		int cr = cl + 1;
+		child = (cr <= right && arr[cr] > arr[cl]) ? cr : cl;
+		if (temp >= arr[child])
+			break;
+		arr[parent] = arr[child];
+	}
+	arr[parent] = temp;
+}
+
+void HeapSortBook(int arr[], int n)
+{
+	int i;
+	for (i = (n - 1) / 2; i >= 0; --i)
+		downheap(arr, i, n - 1);
+	for (i = n - 1; i > 0; --i)
+	{
+		SWAP(int, arr[0], arr[i]);
+		downheap(arr, 0, i - 1);
+	}
+}
+
+void CountingSort(int arr[], int n, int range)
+{
+	int* pCount = new int[range];
+	int* pNewArr = new int[n];
+
+	ZeroMemory(pCount, sizeof(int) * range);
+	//ZeroMemory(pNewArr, sizeof(int) * n);
+
+	for (int i = 0; i < n; ++i)
+		pCount[arr[i]]++;
+
+	for (int i = 1; i < n; ++i)
+		pCount[i] += pCount[i - 1];
+
+	for (int i = n - 1; i >= 0; --i)
+		pNewArr[--pCount[arr[i]]] = arr[i];
+
+	memcpy(arr, pNewArr, sizeof(int) * n);
+
+	delete[] pCount;
+	pCount = nullptr;
+	delete[] pNewArr;
+	pNewArr = nullptr;
+}
+
+void CountingSortBook(int a[], int n, int max)
+{
+	int i;
+	int* f = (int*)calloc(max + 1, sizeof(int));
+	int* b = (int*)calloc(n, sizeof(int));
+
+	for (i = 0; i <= max; ++i) f[i] = 0;
+	for (i = 0; i < n; ++i) ++f[a[i]];
+	for (i = 1; i <= max; ++i) f[i] += f[i - 1];
+	for (i = n - 1; i >= 0; --i) b[--f[a[i]]] = a[i];
+	for (i = 0; i < n; ++i) a[i] = b[i];
+
+	free(b);
+	free(f);
 }

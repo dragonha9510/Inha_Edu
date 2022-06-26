@@ -25,3 +25,15 @@ void ShellSortMain();
 void QuickSort(int arr[], int n, int start, int end);
 void QuickSort2(int arr[], int n, int start, int end);
 void QuickSortBook(int arr[], int left, int right);
+
+void MergeSort(int arr[], int n);
+void MergeSort2(int arr[], int n);
+void MergeSort3(int arr[], int n);
+void __mergesort(int arr[], int left, int right, int buff[]);
+int mergesort(int arr[], int n);
+
+void HeapSort(int arr[], int n);
+void HeapSortBook(int arr[], int n);
+
+void CountingSort(int arr[], int n, int range);
+void CountingSortBook(int a[], int n, int max);
