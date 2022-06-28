@@ -758,3 +758,60 @@ void CountingSortBook(int a[], int n, int max)
 	free(b);
 	free(f);
 }
+
+bool SearchWord(char sour[], char search[], int len, int searchlen, int idx, int searchidx, bool res)
+{
+	for (int i = 0; i < len; ++i)
+		cout << sour[i];
+
+	cout << endl;
+	
+	// + ? | Ãâ·Â
+	for (int i = 0; i < idx + searchidx; ++i)
+		cout << " ";
+
+	if (res)
+		cout << "+";
+	else
+		cout << "|";
+
+	cout << endl;
+	for (int i = 0; i < idx; ++i)
+		cout << " ";
+	for (int j = 0; j < searchlen; ++j)
+		cout << search[j];
+
+	cout << endl;
+
+	return res;
+}
+
+void SearchMain()
+{
+	char chArr[12] = "ABABCDEFGHA";
+	char chSearch[4] = "ABC";
+	BruteForce(chArr, chSearch, 11, 3);
+}
+
+bool BruteForce(char sour[], char search[], int len, int searchlen)
+{
+	int iCnt = 0;
+	for (int i = 0; i < len; ++i)
+	{
+		for (int j = 0; j < searchlen; ++j)
+		{
+			if (SearchWord(sour, search, len, searchlen, i, j, sour[i + j] == search[j]))
+				++iCnt;
+			else
+			{
+				iCnt = 0;
+				break;
+			}
+		}
+
+		if (iCnt == searchlen)
+			return true;
+	}
+
+	return false;
+}

@@ -2,6 +2,7 @@
 
 int main()
 {
-	ShellSortMain();
+	//ShellSortMain();
+	SearchMain();
 	return 0;
 }
