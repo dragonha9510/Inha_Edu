@@ -786,21 +786,89 @@ bool SearchWord(char sour[], char search[], int len, int searchlen, int idx, int
 	return res;
 }
 
+bool SearchWord2(char sour[], char search[], int len, int searchlen, int idx, int searchidx, bool res)
+{
+	for (int i = 0; i < len; ++i)
+		cout << sour[i];
+
+	cout << endl;
+
+	// + ? | 출력
+	for (int i = 0; i < idx; ++i)
+		cout << " ";
+
+	if (res)
+		cout << "+";
+	else
+		cout << "|";
+
+	cout << endl;
+
+	for (int i = 0; i < idx - searchidx; ++i)
+		cout << " ";
+	for (int j = 0; j < searchlen; ++j)
+		cout << search[j];
+
+	cout << endl;
+
+	return res;
+}
+
+#define SEARCHTESTCASE 10000000
 void SearchMain()
 {
-	char chArr[12] = "ABABCDEFGHA";
-	char chSearch[4] = "ABC";
-	BruteForce(chArr, chSearch, 11, 3);
+	//char* chArr = new char[SEARCHTESTCASE];
+
+	//for (int i = 0; i < SEARCHTESTCASE - 8; ++i)
+	//{
+	//	chArr[i] = (i % 2) ? 'A' : 'B';
+	//}
+
+	//chArr[SEARCHTESTCASE - 9] = 'A';
+	//chArr[SEARCHTESTCASE - 8] = 'B';
+	//chArr[SEARCHTESTCASE - 7] = 'A';
+	//chArr[SEARCHTESTCASE - 6] = 'B';
+	//chArr[SEARCHTESTCASE - 5] = 'A';
+	//chArr[SEARCHTESTCASE - 4] = 'A';
+	//chArr[SEARCHTESTCASE - 3] = 'B';
+	//chArr[SEARCHTESTCASE - 2] = 'A';
+	//chArr[SEARCHTESTCASE - 1] = '\0';
+
+	char chArr[20] = "ABCABAB ABABABAABAC";
+	char chSearch[9] = "ABABAABA";
+
+	CStopWatch timer;
+
+	timer.Start();
+	if (KMPSearch(chArr, chSearch, 19, 8))
+		cout << "찾았땅" << endl;
+	timer.Stop();
+
+	cout << "KMP : " << timer.getElapsedTime() << endl;
+	cout << endl;
+
+	//timer.Start();
+	//if (BruteForce(chArr, chSearch, SEARCHTESTCASE - 1, 8))
+	//	cout << "찾았땅" << endl;
+	//timer.Stop();
+
+	//cout << "BTF : " << timer.getElapsedTime() << endl;
 }
 
 bool BruteForce(char sour[], char search[], int len, int searchlen)
 {
+	if (len < searchlen)
+		return false;
+
 	int iCnt = 0;
 	for (int i = 0; i < len; ++i)
 	{
 		for (int j = 0; j < searchlen; ++j)
 		{
-			if (SearchWord(sour, search, len, searchlen, i, j, sour[i + j] == search[j]))
+			if (i + j >= len)
+				return false;
+			//else if (SearchWord(sour, search, len, searchlen, i, j, sour[i + j] == search[j]))
+			else if(sour[i + j] == search[j])
 				++iCnt;
 			else
 			{
@@ -810,8 +878,76 @@ bool BruteForce(char sour[], char search[], int len, int searchlen)
 		}
 
 		if (iCnt == searchlen)
+		{
+			cout << i << "에서 찾음" << endl;
 			return true;
+		}
 	}
 
 	return false;
+}
+
+bool KMPSearch(char sour[], char search[], int len, int searchlen)
+{
+	bool bRes = false;
+	if (len < searchlen)
+		return false;
+
+	int* pTable = new int[searchlen];
+	for (int i = 0; i < searchlen; ++i) pTable[i] = 0;
+
+	int iIdx = 0;
+	int TableValue = 0;
+	for (int i = 0, j = 1; i < searchlen && j < searchlen;)
+	{
+		if (search[iIdx] == search[j])
+		{
+			++iIdx;
+			pTable[j++] = ++TableValue;
+		}
+		else
+		{
+			TableValue = 0;
+
+			if (iIdx == 0)
+			{
+				++j;
+				++i;
+				continue;
+			}
+
+			iIdx = pTable[iIdx - 1];
+		}
+	}
+
+	for (int i = 0, j = 0; i < len;)
+	{
+		if (SearchWord2(sour, search, len, searchlen, i, j, sour[i] == search[j]))
+		//if(sour[i] == search[j])
+		{
+			++i;
+			++j;
+
+			if (j == searchlen)
+			{
+				cout << i - searchlen << "에서 찾음" << endl;
+				bRes = true;
+				break;
+			}
+		}
+		else
+		{
+			if (j != 0)
+			{
+				j = pTable[j - 1];
+				continue;
+			}
+			i++;
+		}
+	}
+
+	delete[] pTable;
+	pTable = nullptr;
+
+	return bRes;
 }

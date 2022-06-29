@@ -42,3 +42,5 @@ void CountingSortBook(int a[], int n, int max);
 // Search Algorithm
 void SearchMain();
 bool BruteForce(char sour[], char search[], int len, int searchlen);
+
+bool KMPSearch(char sour[], char search[], int len, int searchlen);
