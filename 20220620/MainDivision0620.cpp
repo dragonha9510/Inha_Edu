@@ -814,45 +814,48 @@ bool SearchWord2(char sour[], char search[], int len, int searchlen, int idx, in
 	return res;
 }
 
-#define SEARCHTESTCASE 10000000
+#define SEARCHTESTCASE 100000000
 void SearchMain()
 {
-	//char* chArr = new char[SEARCHTESTCASE];
+	char* chArr = new char[SEARCHTESTCASE];
 
-	//for (int i = 0; i < SEARCHTESTCASE - 8; ++i)
-	//{
-	//	chArr[i] = (i % 2) ? 'A' : 'B';
-	//}
+	for (int i = 0; i < SEARCHTESTCASE - 8; ++i)
+	{
+		chArr[i] = (i % 2) ? 'A' : 'B';
+		//chArr[i] = 'C';
+	}
 
-	//chArr[SEARCHTESTCASE - 9] = 'A';
-	//chArr[SEARCHTESTCASE - 8] = 'B';
-	//chArr[SEARCHTESTCASE - 7] = 'A';
-	//chArr[SEARCHTESTCASE - 6] = 'B';
-	//chArr[SEARCHTESTCASE - 5] = 'A';
-	//chArr[SEARCHTESTCASE - 4] = 'A';
-	//chArr[SEARCHTESTCASE - 3] = 'B';
-	//chArr[SEARCHTESTCASE - 2] = 'A';
-	//chArr[SEARCHTESTCASE - 1] = '\0';
+	chArr[SEARCHTESTCASE - 9] = 'A';
+	chArr[SEARCHTESTCASE - 8] = 'B';
+	chArr[SEARCHTESTCASE - 7] = 'A';
+	chArr[SEARCHTESTCASE - 6] = 'B';
+	chArr[SEARCHTESTCASE - 5] = 'A';
+	chArr[SEARCHTESTCASE - 4] = 'B';
+	chArr[SEARCHTESTCASE - 3] = 'B';
+	chArr[SEARCHTESTCASE - 2] = 'B';
+	chArr[SEARCHTESTCASE - 1] = '\0';
 
-	char chArr[20] = "ABCABAB ABABABAABAC";
-	char chSearch[9] = "ABABAABA";
+	//char chArr[23] = "ABCDEFGABCDEFGBBBBBAAA";
+	char chSearch[7] = "ABABBB";
 
 	CStopWatch timer;
 
 	timer.Start();
-	if (KMPSearch(chArr, chSearch, 19, 8))
+	if (BoyerMooreSearch(chArr, chSearch, SEARCHTESTCASE - 1, 6))
 		cout << "Ã£¾Ò¶¥" << endl;
 	timer.Stop();
 
-	cout << "KMP : " << timer.getElapsedTime() << endl;
+	cout << "BMS : " << timer.getElapsedTime() << endl;
 	cout << endl;
 
-	//timer.Start();
-	//if (BruteForce(chArr, chSearch, SEARCHTESTCASE - 1, 8))
-	//	cout << "Ã£¾Ò¶¥" << endl;
-	//timer.Stop();
+	timer.Start();
+	if (BruteForce(chArr, chSearch, SEARCHTESTCASE - 1, 6))
+		cout << "Ã£¾Ò¶¥" << endl;
+	timer.Stop();
 
-	//cout << "BTF : " << timer.getElapsedTime() << endl;
+	cout << "BTF : " << timer.getElapsedTime() << endl;
+
+	delete[] chArr;
 }
 
 bool BruteForce(char sour[], char search[], int len, int searchlen)
@@ -922,8 +925,8 @@ bool KMPSearch(char sour[], char search[], int len, int searchlen)
 
 	for (int i = 0, j = 0; i < len;)
 	{
-		if (SearchWord2(sour, search, len, searchlen, i, j, sour[i] == search[j]))
-		//if(sour[i] == search[j])
+		//if (SearchWord2(sour, search, len, searchlen, i, j, sour[i] == search[j]))
+		if(sour[i] == search[j])
 		{
 			++i;
 			++j;
@@ -950,4 +953,55 @@ bool KMPSearch(char sour[], char search[], int len, int searchlen)
 	pTable = nullptr;
 
 	return bRes;
+}
+
+bool BoyerMooreSearch(char sour[], char search[], int len, int searchlen)
+{
+	// CreateTable
+	const int Alpha = 'Z' - 'A' + 1;
+	int pTable[Alpha] = {};
+
+	for (int i = 0; i < Alpha; ++i)
+		pTable[i] = searchlen;
+	
+	for (int i = 0; i < searchlen; ++i)
+	{
+		if (i == searchlen - 1)
+		{
+			if (pTable[search[i] - 'A'] != searchlen)
+				++pTable[search[i] - 'A'];
+			else
+				pTable[search[i] - 'A'] = searchlen;
+			break;
+		}
+		pTable[search[i] - 'A'] = searchlen - i - 1;
+	}
+	
+	// Search Start
+
+	for (int i = searchlen - 1; i < len; ++i)
+	{
+		int iCheck = 0;
+		for (int j = searchlen - 1; j >= 0; --j)
+		{
+			if (sour[i - iCheck] == search[j])
+			//if(SearchWord2(sour, search, len, searchlen, i - iCheck, j, sour[i-iCheck] == search[j]))
+			{
+				++iCheck;
+				if (iCheck == searchlen)
+				{
+					cout << i - iCheck + 1 << "¿¡¼­ Ã£À½!" << endl;
+					return true;
+				}
+			}
+			else
+			{
+				i += pTable[sour[i - iCheck] - 'A'] - 1 - iCheck;
+				iCheck = 0;
+				break;
+			}
+		}
+	}
+
+	return false;
 }
